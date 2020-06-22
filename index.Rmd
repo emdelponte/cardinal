@@ -1,0 +1,104 @@
+---
+title: "Cardinal temperatures"
+output: 
+  flexdashboard::flex_dashboard:
+    theme: united
+    css: style2.css
+    social: menu
+editor_options: 
+  chunk_output_type: inline
+---
+    
+
+Dashboard
+=====================================  
+
+
+Inputs {.sidebar}
+-------------------------------------
+
+
+
+```{r include=FALSE}
+library(tidyverse)
+library(janitor)
+dat <- read_csv("cardinal-temperature.csv")
+cardinal <- dat %>% 
+  separate(SPECIES_FINAL, c("GENUS", "EPITHET"), " ", remove = F) %>% 
+  select(CLASS, SPECIES_FINAL,  PROCESS,CARDINAL, TEMPERATURE, DISEASE, HOST_PLANT)
+
+cardinal$CARDINAL <- factor(cardinal$CARDINAL, c("min", "opt", "max"))
+```
+
+   
+```{r}
+library(crosstalk)
+sd <- SharedData$new(cardinal)
+```
+
+```{r}
+
+filter_checkbox("CLASS", "Class", sd, ~CLASS, inline = F)
+filter_checkbox("PROCESS", "Process", sd, ~PROCESS, inline = F)
+filter_select("SPECIES_FINAL", "Species", sd, ~SPECIES_FINAL)
+
+
+
+```
+    
+Grid view
+-------------------------------------
+    
+### Grid view
+   
+
+
+
+```{r}
+library(plotly)
+library(DT)
+datatable(sd, 
+          extensions = c('Buttons'),
+          escape = TRUE, rownames = TRUE,
+         class = 'cell-border stripe',
+                      options=list(dom = 'Bfrtip',buttons = c( 'excel', 'pdf'),deferRender=TRUE, 
+                          scrollY=500, 
+                          scroller=TRUE,
+                          colReorder = TRUE,
+                          pageLength = 100))
+
+```
+   
+
+   
+Column {.tabset data-width=500}
+-------------------------------------
+   
+### Process
+
+```{r}
+library(viridis)
+sd %>% 
+  plot_ly( x = ~ CARDINAL,
+          y = ~ TEMPERATURE, color = ~ PROCESS, type = "violin") %>% 
+  layout(violinmode = "group")
+ 
+```   
+ 
+
+
+### Class
+
+```{r}
+library(viridis)
+sd %>% 
+  plot_ly( x = ~ CARDINAL,
+          y = ~ TEMPERATURE, color = ~ CLASS, type = "violin") %>% 
+  layout(violinmode = "group")
+ 
+```   
+
+About 
+===========
+
+
