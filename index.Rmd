@@ -59,7 +59,7 @@ library(plotly)
 library(DT)
 datatable(sd, 
           extensions = c('Buttons'),
-          escape = TRUE, rownames = TRUE,
+          escape = TRUE, rownames = FALSE,
          class = 'cell-border stripe',
                       options=list(dom = 'Bfrtip',buttons = c( 'excel', 'pdf'),deferRender=TRUE, 
                           scrollY=500, 
