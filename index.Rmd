@@ -22,7 +22,10 @@ Inputs {.sidebar}
 ```{r include=FALSE}
 library(tidyverse)
 library(janitor)
+library(gsheet)
 dat <- read_csv("cardinal-temperature.csv")
+url <- 'https://docs.google.com/spreadsheets/d/14ssaUpLuVCT53qnQrQHk0gHh2SFn2prUY6Af078P648/edit?usp=sharing'
+dat2 <- gsheet2tbl(url)
 cardinal <- dat %>% 
   separate(SPECIES_FINAL, c("GENUS", "EPITHET"), " ", remove = F) %>% 
   select(CLASS, SPECIES_FINAL,  PROCESS,CARDINAL, TEMPERATURE, DISEASE, HOST_PLANT)
