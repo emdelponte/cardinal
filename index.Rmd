@@ -8,16 +8,10 @@ output:
 editor_options: 
   chunk_output_type: inline
 ---
-    
 
-Dashboard
-=====================================  
+# Dashboard
 
-
-Inputs {.sidebar}
--------------------------------------
-
-
+## Inputs {.sidebar data-width="280"}
 
 ```{r include=FALSE}
 library(tidyverse)
@@ -31,9 +25,12 @@ cardinal <- dat %>%
   select(CLASS, SPECIES_FINAL,  PROCESS,CARDINAL, TEMPERATURE, DISEASE, HOST_PLANT)
 
 cardinal$CARDINAL <- factor(cardinal$CARDINAL, c("min", "opt", "max"))
+
+
+
+
 ```
 
-   
 ```{r}
 library(crosstalk)
 sd <- SharedData$new(cardinal)
@@ -45,17 +42,13 @@ filter_checkbox("CLASS", "Class", sd, ~CLASS, inline = F)
 filter_checkbox("PROCESS", "Process", sd, ~PROCESS, inline = F)
 filter_select("SPECIES_FINAL", "Species", sd, ~SPECIES_FINAL)
 
-
-
 ```
-    
-Grid view
--------------------------------------
-    
+
+This interactive dashboard displays the data on the "cardinal temperatures" - minimum (Tmin), optimum (Topt) and maximum (Tmax) temperatures of five life-cycle processes (disease development, fructification, infection , spore germination and sporulation ), as well as growth in culture which were extracted for fungi and oomycete species. The data are available online at: <https://datadryad.org/stash/dataset/doi:10.5061/dryad.tqjq2bvw6>. The publication can be found at: <https://www.nature.com/articles/s41467-020-16778-5>
+
+## Grid view
+
 ### Grid view
-   
-
-
 
 ```{r}
 library(plotly)
@@ -64,19 +57,16 @@ datatable(sd,
           extensions = c('Buttons'),
           escape = TRUE, rownames = FALSE,
          class = 'cell-border stripe',
-                      options=list(dom = 'Bfrtip',buttons = c( 'excel', 'pdf'),deferRender=TRUE, 
+                      options=list(dom = 'Bfrtip',buttons = c( 'excel'),deferRender=TRUE, 
                           scrollY=500, 
                           scroller=TRUE,
                           colReorder = TRUE,
                           pageLength = 100))
 
 ```
-   
 
-   
-Column {.tabset data-width=500}
--------------------------------------
-   
+## Column {.tabset data-width="500"}
+
 ### Process
 
 ```{r}
@@ -86,9 +76,7 @@ sd %>%
           y = ~ TEMPERATURE, color = ~ PROCESS, type = "box") %>% 
   layout(boxmode = "group")
  
-```   
- 
-
+```
 
 ### Class
 
@@ -99,9 +87,6 @@ sd %>%
           y = ~ TEMPERATURE, color = ~ CLASS, type = "box") %>% 
   layout(boxmode = "group")
  
-```   
+```
 
-About 
-===========
-
-
+# 
