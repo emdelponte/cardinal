@@ -83,8 +83,8 @@ Column {.tabset data-width=500}
 library(viridis)
 sd %>% 
   plot_ly( x = ~ CARDINAL,
-          y = ~ TEMPERATURE, color = ~ PROCESS, type = "violin") %>% 
-  layout(violinmode = "group")
+          y = ~ TEMPERATURE, color = ~ PROCESS, type = "box") %>% 
+  layout(boxmode = "group")
  
 ```   
  
@@ -96,8 +96,8 @@ sd %>%
 library(viridis)
 sd %>% 
   plot_ly( x = ~ CARDINAL,
-          y = ~ TEMPERATURE, color = ~ CLASS, type = "violin") %>% 
-  layout(violinmode = "group")
+          y = ~ TEMPERATURE, color = ~ CLASS, type = "box") %>% 
+  layout(boxmode = "group")
  
 ```   
 
