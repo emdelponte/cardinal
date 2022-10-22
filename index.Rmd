@@ -97,6 +97,7 @@ config(displayModeBar = F)
 ```{r}
 library(viridis)
 sd %>% 
+  
   plot_ly( x = ~ PROCESS,
           y = ~ TEMPERATURE, color = ~ CLASS, type = "box") %>% 
   layout(boxmode = "group")%>%
