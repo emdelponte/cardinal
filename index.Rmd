@@ -11,7 +11,7 @@ editor_options:
 
 # Dashboard
 
-## Inputs {.sidebar data-width="280"}
+## Inputs {.sidebar data-width="250"}
 
 ```{r include=FALSE}
 library(tidyverse)
@@ -22,7 +22,7 @@ url <- 'https://docs.google.com/spreadsheets/d/14ssaUpLuVCT53qnQrQHk0gHh2SFn2prU
 dat2 <- gsheet2tbl(url)
 cardinal <- dat %>% 
   separate(SPECIES_FINAL, c("GENUS", "EPITHET"), " ", remove = F) %>% 
-  select(CLASS, SPECIES_FINAL,  PROCESS,CARDINAL, TEMPERATURE, DISEASE, HOST_PLANT)
+  select(CLASS, SPECIES_FINAL,  PROCESS,CARDINAL, TEMPERATURE, DISEASE, HOST_PLANT, TEMPERATURE_REFERENCE)
 
 cardinal$CARDINAL <- factor(cardinal$CARDINAL, c("min", "opt", "max"))
 
