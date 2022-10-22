@@ -67,26 +67,40 @@ datatable(sd,
 
 ## Column {.tabset data-width="500"}
 
-### Process
+### Cardinal by process
 
 ```{r}
 library(viridis)
 sd %>% 
   plot_ly( x = ~ CARDINAL,
           y = ~ TEMPERATURE, color = ~ PROCESS, type = "box") %>% 
-  layout(boxmode = "group")
+  layout(boxmode = "group") %>%
+config(displayModeBar = F)
  
 ```
 
-### Class
+### Cardinal by class 
 
 ```{r}
 library(viridis)
 sd %>% 
   plot_ly( x = ~ CARDINAL,
           y = ~ TEMPERATURE, color = ~ CLASS, type = "box") %>% 
-  layout(boxmode = "group")
+  layout(boxmode = "group")%>%
+config(displayModeBar = F)
  
 ```
 
-# 
+
+### Temperature by process and class
+
+```{r}
+library(viridis)
+sd %>% 
+  plot_ly( x = ~ PROCESS,
+          y = ~ TEMPERATURE, color = ~ CLASS, type = "box") %>% 
+  layout(boxmode = "group")%>%
+config(displayModeBar = F)
+ 
+```
+
